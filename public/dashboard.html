@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="styles/profile.css">
+    <style>
+        /* Добавим стили для аватара и кнопки загрузки */
+        .profile-avatar-container {
+            position: relative;
+            width: 100px; /* Установите нужный диаметр */
+            height: 100px; /* Должен быть равен ширине для круга */
+            border-radius: 50%; /* Делает контейнер круглым */
+            overflow: hidden; /* Обрезает содержимое по границе контейнера */
+            margin: 0 auto 15px auto; /* Центрируем и добавим отступ снизу */
+            background-color: #ddd; /* Цвет фона для заглушки */
+            display: flex; /* Для центрирования заглушки */
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-avatar-container img {
+            width: 100%; /* Изображение занимает всю ширину контейнера */
+            height: 100%; /* Изображение занимает всю высоту контейнера */
+            object-fit: cover; /* Обрезает и заполняет изображение, сохраняя пропорции */
+            display: block; /* Убирает лишние пробелы под изображением */
+        }
+
+        .profile-avatar-fallback {
+            font-size: 24px; /* Размер шрифта текста */
+            color: white; /* Цвет текста */
+            text-align: center; /* Выравнивание текста по центру */
+            line-height: 100px; /* Высота строки = высоте контейнера для вертикального центрирования */
+            width: 100%; /* Занимает всю ширину контейнера */
+            height: 100%; /* Занимает всю высоту контейнера */
+            display: flex; /* Используем flex для центрирования */
+            align-items: center; /* Центрируем по вертикали */
+            justify-content: center; /* Центрируем по горизонтали */
+            background-color: #007bff; /* Цвет фона заглушки */
+        }
+
+        .upload-avatar-btn {
+            margin-top: 5px; /* Отступ сверху от аватара */
+            font-size: 0.85em; /* Уменьшим размер шрифта кнопки */
+            padding: 5px 10px; /* Уменьшим внутренние отступы кнопки */
+            width: auto; /* Ширина по содержимому */
+            display: block; /* Кнопка как блочный элемент для центровки */
+            margin-left: auto; /* Центрируем кнопку */
+            margin-right: auto; /* Центрируем кнопку */
+        }
+
+        /* Стили для скрытого input файла */
+        #avatarInput {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 12H15M9 16H15M17 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V19C19 20.1046 18.1046 21 17 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    ResumePro
+                </a>
+                <ul class="nav-links">
+                    <li><a href="main-page.html">Главная</a></li>
+                    <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
+                    <li><a href="mini-pages/help.html">Помощь</a></li>
+                </ul>
+                <button class="mobile-menu-btn">☰</button>
+            </nav>
+        </div>
+    </header>
+    <!-- Mobile Menu -->
+    <div class="overlay"></div>
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">ResumePro</a>
+            <button class="close-menu">✕</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="templates.html">Шаблоны</a></li>
+            <li><a href="help.html">Помощь</a></li>
+        </ul>
+    </div>
+     <!-- Profile Section -->
+    <div class="container">
+        <div class="profile-wrapper">
+            <!-- Sidebar -->
+            <div class="profile-sidebar">
+                <div class="profile-header">
+                    <!-- Блок для аватара -->
+                    <div class="avatar-upload-section">
+                        <div class="profile-avatar-container">
+                            <!-- Изображение аватара -->
+                            <img id="profileAvatarImg" src="" alt="Аватар" style="display: none;">
+                            <!-- Заглушка аватара -->
+                            <div id="profileAvatarFallback" class="profile-avatar-fallback">ИИ</div>
+                        </div>
+                        <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                        <button type="button" id="uploadAvatarBtn" class="btn btn-outline upload-avatar-btn">Изменить фото</button>
+                    </div>
+                    <!-- Информация о пользователе -->
+                    <div id="user-info"></div>
+                </div>
+                 <button id="logoutBtn" class="btn btn-logout btn-accent">Выйти</button>
+                <button class="btn btn-outline" onclick="window.location.href='resume-builder.html'">Создать резюме</button>
+                </div>
+                <div class="container">
+            <h1 style="text-align: center;">Ваш Профиль</h1>
+        <section class="profile-section">
+            <div id="profileInfo">
+                <p>Загрузка профиля...</p>
+            </div>
+        </section>
+        <section class="resumes-section">
+            <h2>Ваши Резюме</h2>
+            <div id="resumesList">
+                <p>Загрузка резюме...</p>
+            </div>
+            <br>
+             <button id="createResumeBtn" class="btn btn-primary">Создать новое резюме</button>
+        </section>
+    </div>
+            </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ResumePro</h3>
+                    <p>Интерактивный конструктор резюме для современных специалистов. Создавайте профессиональные резюме за минуты с нашими готовыми шаблонами.</p>
+                    <div class="footer-contact">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:support@resumepro.ru">support@resumepro.ru</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="main-page.html">Главная</a></li>
+                        <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Дополнительная информация</h3>
+                    <ul class="footer-links">
+                        <li><a href="mini-pages/faq.html">FAQ</a></li>
+                        <li><a href="mini-pages/contacts.html">Контакты</a></li>
+                        <li><a href="mini-pages/help.html">Помощь</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 ResumePro. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // --- ФУНКЦИИ ДЛЯ АВАТАРА ---
+        // Функция для обновления отображения аватара
+        function updateAvatarDisplay(avatarUrl, userName = 'ИИ') {
+            const imgElement = document.getElementById('profileAvatarImg');
+            const fallbackElement = document.getElementById('profileAvatarFallback');
+
+            if (avatarUrl) {
+                // Если есть URL аватара
+                imgElement.src = avatarUrl; // Установить путь к изображению
+                imgElement.style.display = 'block'; // Показать изображение
+                fallbackElement.style.display = 'none'; // Скрыть заглушку
+            } else {
+                // Если URL аватара нет
+                imgElement.style.display = 'none'; // Скрыть изображение
+                fallbackElement.style.display = 'flex'; // Показать заглушку как flex
+                // Установить начальные буквы имени в заглушке
+                const initials = userName ? userName.charAt(0).toUpperCase() : 'ИИ';
+                fallbackElement.textContent = initials;
+            }
+        }
+
+        // Обработчик для кнопки "Изменить фото"
+        document.getElementById('uploadAvatarBtn').addEventListener('click', function() {
+            document.getElementById('avatarInput').click(); // Симулируем клик по скрытому input
+        });
+
+        // Обработчик для выбора файла
+        document.getElementById('avatarInput').addEventListener('change', async function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // Проверка типа файла
+            if (!file.type.match('image.*')) {
+                alert('Пожалуйста, выберите изображение (jpeg, png, gif).');
+                return;
+            }
+
+            // Проверка размера файла (например, ограничение 5MB)
+            const maxSizeInBytes = 5 * 1024 * 1024; // 5MB
+            if (file.size > maxSizeInBytes) {
+                alert('Файл слишком большой. Максимальный размер 5MB.');
+                return;
+            }
+
+            const token = localStorage.getItem('token'); // или 'authToken', в зависимости от вашего кода
+            if (!token) {
+                alert('Пользователь не авторизован.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('avatar', file);
+
+            try {
+                const response = await fetch('/api/profile/avatar', { // Маршрут на вашем сервере
+                    method: 'PUT', // Или POST
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                        // Не добавляем Content-Type, браузер сам установит нужный boundary для multipart/form-data
+                    },
+                    body: formData
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    // После успешной загрузки, обновляем отображение аватара
+                    // Сервер должен вернуть avatarUrl (например, '/uploads/avatars/avatar_abc123.jpg')
+                    // и userName для заглушки
+                    updateAvatarDisplay(result.avatarUrl, result.userName);
+                    console.log('Аватар успешно обновлен:', result.avatarUrl);
+                    alert('Фото профиля успешно обновлено!');
+                } else {
+                    const errorResult = await response.json();
+                    console.error('Ошибка обновления аватара:', errorResult.error || response.statusText);
+                    alert(`Ошибка обновления аватара: ${errorResult.error || 'Неизвестная ошибка'}`);
+                }
+            } catch (error) {
+                console.error('Ошибка сети при загрузке аватара:', error);
+                alert('Произошла ошибка сети при загрузке фото.');
+            }
+        });
+
+        // --- ОСТАЛЬНЫЙ КОД (loadUserInfo, dashboard.js, resume-builder.js) ---
+        // Проверяем авторизацию при загрузке страницы
+       async function loadUserInfo() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = 'login.html';
+        return;
+    }
+    try {
+        const response = await fetch('http://localhost:3000/api/profile', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (response.ok) {
+            const data = await response.json();
+            
+            // Сохраняем данные пользователя в localStorage
+            localStorage.setItem('user', JSON.stringify(data.user));
+            
+            // Обновляем информацию о пользователе
+            document.getElementById('user-info').innerHTML = `
+                <p>Имя: ${data.user.name}</p>
+                <p>Email: ${data.user.email}</p>
+                <p><strong>Дата регистрации:</strong> ${new Date(data.user.created_at).toLocaleString()}</p>
+            `;
+            
+            // Обновляем аватар
+            updateAvatarDisplay(data.user.avatar_url, data.user.name);
+        } else {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        }
+    } catch (error) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        window.location.href = 'login.html';
+    }
+}
+
+        // dashboard.js
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileInfoDiv = document.getElementById('profileInfo');
+            const resumesListDiv = document.getElementById('resumesList');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const createResumeBtn = document.getElementById('createResumeBtn');
+            // Проверяем, авторизован ли пользователь
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert('Пожалуйста, войдите в систему.');
+                window.location.href = 'login.html';
+                return;
+            }
+            // Функция для получения и отображения профиля
+           async function loadProfile() {
+    try {
+        const response = await fetch('/api/profile', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (!response.ok) {
+            throw new Error('Ошибка при получении профиля');
+        }
+        const data = await response.json();
+        
+        // Сохраняем данные пользователя в localStorage
+        localStorage.setItem('user', JSON.stringify(data.user));
+        
+        // Обновляем аватар
+        updateAvatarDisplay(data.user.avatar_url, data.user.name);
+        
+    } catch (error) {
+        console.error('Ошибка загрузки профиля:', error);
+        profileInfoDiv.innerHTML = `<p>Ошибка загрузки профиля: ${error.message}</p>`;
+    }
+}
+            // Функция для получения и отображения списка резюме (ОБНОВЛЕНА)
+            async function loadResumes() {
+                try {
+                    const response = await fetch('/api/resumes', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    if (!response.ok) {
+                        throw new Error('Ошибка при получении резюме');
+                    }
+                    const data = await response.json();
+                    console.log("Полученные резюме:", data.resumes); // Лог для проверки
+                    if (data.resumes.length === 0) {
+                        resumesListDiv.innerHTML = '<p>У вас пока нет сохраненных резюме.</p>';
+                        return;
+                    }
+                    // --- ОБНОВЛЕНИЕ: Генерация карточек вместо списка ---
+                    let resumesHTML = '<div class="resumes-grid">'; // Контейнер для карточек с классом grid
+                    data.resumes.forEach(resume => {
+                        const createdAt = new Date(resume.created_at).toLocaleDateString();
+                        const updatedAt = new Date(resume.updated_at).toLocaleDateString();
+                        resumesHTML += `
+                            <div class="resume-card">
+                                <h3 class="resume-card-title">
+                                    <a href="resume-builder.html?resumeId=${resume.resume_id}">${resume.title}</a>
+                                </h3>
+                                <div class="resume-card-meta">
+                                    <p><strong>ID:</strong> ${resume.resume_id}</p>
+                                    <p><strong>Создано:</strong> ${createdAt}</p>
+                                    <p><strong>Обновлено:</strong> ${updatedAt}</p>
+                                </div>
+                                <div class="resume-card-actions">
+                                    <button class="btn btn-edit" onclick="editResume('${resume.resume_id}')">Редактировать</button>
+                                    <button class="btn btn-delete btn-accent" onclick="deleteResume('${resume.resume_id}')">Удалить</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    resumesHTML += '</div>';
+                    resumesListDiv.innerHTML = resumesHTML;
+                } catch (error) {
+                    console.error('Ошибка загрузки резюме:', error);
+                    resumesListDiv.innerHTML = `<p>Ошибка загрузки резюме: ${error.message}</p>`;
+                }
+            }
+            // Функция для выхода
+            function logout() {
+                localStorage.removeItem('authToken');
+                window.location.href = 'login.html';
+            }
+            // Функция для перехода к редактору нового резюме
+            function createNewResume() {
+                // Просто перенаправляем на редактор, не передавая ID резюме
+                window.location.href = 'resume-builder.html';
+            }
+            // Функция для редактирования резюме (пока просто перенаправление)
+            window.editResume = function(resumeId) {
+                // Перенаправляем на редактор с ID резюме в URL
+                window.location.href = `resume-builder.html?resumeId=${resumeId}`;
+            }
+            // Функция для удаления резюме
+            window.deleteResume = async function(resumeId) {
+                if (!confirm('Вы уверены, что хотите удалить это резюме?')) {
+                    return;
+                }
+                try {
+                    const response = await fetch(`/api/resumes/${resumeId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                    if (response.ok) {
+                        alert('Резюме успешно удалено');
+                        loadResumes(); // Перезагружаем список после удаления
+                    } else {
+                        const errorData = await response.json();
+                        alert(`Ошибка удаления: ${errorData.error || 'Неизвестная ошибка'}`);
+                    }
+                } catch (error) {
+                    console.error('Ошибка удаления резюме:', error);
+                    alert('Произошла ошибка при удалении резюме.');
+                }
+            }
+            // Привязываем обработчики событий
+            logoutBtn.addEventListener('click', logout);
+            createResumeBtn.addEventListener('click', createNewResume);
+            // Загружаем данные при открытии страницы
+             loadUserInfo();
+            loadProfile();
+            loadResumes();
+        });
+
+        // Загружаем данные при открытии страницы
+       
+
+        // resume-builder.js
+        // ... (весь существующий код) ...
+        // Новая функция для загрузки резюме по ID
+        async function loadResume(resumeId) {
+            console.log("Загрузка резюме с ID:", resumeId);
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                console.error("Токен не найден при загрузке резюме");
+                alert('Пользователь не авторизован. Пожалуйста, войдите в систему.');
+                window.location.href = 'login.html';
+                return;
+            }
+            try {
+                const response = await fetch(`/api/resumes/${resumeId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error(`Ошибка загрузки: ${response.status}`);
+                }
+                const result = await response.json();
+                const resumeData = result.resume.data; // Данные резюме находятся в поле 'data'
+                console.log("Данные загруженного резюме:", resumeData);
+                // Заполняем форму данными
+                document.getElementById('resume-title').value = result.resume.title; // Заголовок резюме
+                document.getElementById('fullName').value = resumeData.personalInfo.fullName || '';
+                document.getElementById('jobTitle').value = resumeData.personalInfo.jobTitle || '';
+                document.getElementById('email').value = resumeData.personalInfo.email || '';
+                document.getElementById('phone').value = resumeData.personalInfo.phone || '';
+                document.getElementById('location').value = resumeData.personalInfo.location || '';
+                document.getElementById('summary').value = resumeData.personalInfo.summary || '';
+                // Заполняем опыт работы
+                const experienceContainer = document.getElementById('experienceContainer');
+                experienceContainer.innerHTML = ''; // Очищаем контейнер
+                resumeData.experience.forEach((exp, index) => {
+                    if (index > 0) { // Создаем новые поля для всех, кроме первого
+                        addExperienceItem();
+                    }
+                    const item = experienceContainer.querySelectorAll('.dynamic-item')[index];
+                    item.querySelector('.exp-position').value = exp.position || '';
+                    item.querySelector('.exp-company').value = exp.company || '';
+                    item.querySelector('.exp-period').value = exp.period || '';
+                    item.querySelector('.exp-description').value = exp.description || '';
+                });
+                // Заполняем образование
+                const educationContainer = document.getElementById('educationContainer');
+                educationContainer.innerHTML = ''; // Очищаем контейнер
+                resumeData.education.forEach((edu, index) => {
+                    if (index > 0) { // Создаем новые поля для всех, кроме первого
+                        addEducationItem();
+                    }
+                    const item = educationContainer.querySelectorAll('.dynamic-item')[index];
+                    item.querySelector('.edu-institution').value = edu.institution || '';
+                    item.querySelector('.edu-degree').value = edu.degree || '';
+                    item.querySelector('.edu-start-year').value = edu.startYear || '';
+                    item.querySelector('.edu-end-year').value = edu.endYear || '';
+                    // Валидируем заполненные поля
+                    validateEducationFields(item);
+                });
+                // Заполняем навыки
+                const skillsContainer = document.getElementById('skillsContainer');
+                skillsContainer.innerHTML = ''; // Очищаем контейнер
+                resumeData.skills.forEach(skill => {
+                    addSkillToUI(skill); // Предполагаем, что у тебя есть функция для добавления навыка в UI
+                });
+                // Выбираем шаблон
+                document.querySelectorAll('.template-option').forEach(opt => opt.classList.remove('active'));
+                const templateOption = document.querySelector(`.template-option[data-template="${resumeData.template}"]`);
+                if (templateOption) {
+                    templateOption.classList.add('active');
+                    document.getElementById('resumePreview').className = `resume-preview template-${resumeData.template}`;
+                }
+                // Обновляем предпросмотр
+                updatePreview();
+                updateExperiencePreview();
+                updateEducationPreview();
+                updateSkillsPreview();
+                console.log("Резюме успешно загружено в форму.");
+                // Переключаем функцию сохранения на обновление
+                isEditing = true;
+                currentResumeId = resumeId;
+                document.getElementById('saveBtn').textContent = 'Обновить'; // Изменяем текст кнопки
+            } catch (error) {
+                console.error('Ошибка загрузки резюме:', error);
+                alert(`Ошибка загрузки резюме: ${error.message}`);
+            }
+        }
+        // Глобальные переменные для отслеживания режима редактирования
+        let isEditing = false;
+        let currentResumeId = null;
+        // Обновляем функцию saveResume для поддержки обновления
+        async function saveResume() {
+            console.log("Вызов функции saveResume (режим:", isEditing ? "обновление" : "создание", ")");
+            if (!validateAllFields()) {
+                alert('Пожалуйста, исправьте ошибки в форме перед сохранением.');
+                return;
+            }
+            const formData = collectFormData();
+            const title = formData.title;
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                console.error("Токен не найден в localStorage");
+                alert('Пользователь не авторизован. Пожалуйста, войдите в систему.');
+                window.location.href = 'login.html';
+                return;
+            }
+            let endpoint = '/api/resumes';
+            let method = 'POST';
+            if (isEditing && currentResumeId) {
+                endpoint = `/api/resumes/${currentResumeId}`;
+                method = 'PUT'; // Используем PUT для обновления
+            }
+            try {
+                console.log("Отправка запроса на сервер... Endpoint:", endpoint, "Method:", method);
+                const response = await fetch(endpoint, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        title: title,
+                         formData
+                    })
+                });
+                console.log("Ответ от сервера получен, статус:", response.status);
+                const result = await response.json();
+                console.log("Тело ответа от сервера:", result);
+                if (response.ok) {
+                    if (method === 'POST') {
+                        alert('Резюме успешно создано и сохранено!');
+                        // Сбрасываем режим редактирования
+                        isEditing = false;
+                        currentResumeId = null;
+                        document.getElementById('saveBtn').textContent = 'Сохранить';
+                    } else { // PUT
+                        alert('Резюме успешно обновлено!');
+                    }
+                    console.log('Сохраненное/обновленное резюме:', result.resume);
+                } else {
+                    alert(`Ошибка ${method === 'PUT' ? 'обновления' : 'сохранения'}: ${result.error || 'Неизвестная ошибка'}`);
+                    console.error('Ошибка сервера:', result.error);
+                }
+            } catch (error) {
+                console.error('Ошибка сети или обработки запроса:', error);
+                alert('Произошла ошибка сети или обработки запроса. Пожалуйста, проверьте консоль браузера и сервера.');
+            }
+        }
+        // Вспомогательная функция для добавления навыка в UI (если её нет)
+        function addSkillToUI(skillText) {
+            if (!skillText) return;
+            const skillsContainer = document.getElementById('skillsContainer');
+            const skillTag = document.createElement('div');
+            skillTag.className = 'skill-tag';
+            skillTag.innerHTML = `
+                ${skillText} <span class="remove-skill">×</span>
+            `;
+            skillsContainer.appendChild(skillTag);
+            // Добавляем обработчик удаления
+            const removeSkill = skillTag.querySelector('.remove-skill');
+            removeSkill.addEventListener('click', () => {
+                skillTag.remove();
+                updateSkillsPreview();
+            });
+        }
+        // Функция для добавления нового поля опыта (для загрузки)
+        function addExperienceItem() {
+            const addExperienceBtn = document.getElementById('addExperience');
+            addExperienceBtn.click(); // Просто симулируем клик по кнопке добавления
+        }
+        // Функция для добавления нового поля образования (для загрузки)
+        function addEducationItem() {
+            const addEducationBtn = document.getElementById('addEducation');
+            addEducationBtn.click(); // Просто симулируем клик по кнопке добавления
+        }
+    </script>
+</body>
+</html>

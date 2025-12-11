@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Помощь - ResumePro</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 12H15M9 16H15M17 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V19C19 20.1046 18.1046 21 17 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    ResumePro
+                </a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Главная</a></li>
+                    <li><a href="../index.html#templates-grid">Шаблоны</a></li>
+                    <li><a href="#">Помощь</a></li> <!-- Текущая страница -->
+                </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">Войти</button>
+                    <button class="btn btn-accent">Начать сейчас</button>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="overlay"></div>
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="../index.html" class="logo">ResumePro</a>
+            <button class="close-menu">✕</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="../index.html">Главная</a></li>
+            <li><a href="../index.html#templates-grid">Шаблоны</a></li>
+            <li><a href="#">Помощь</a></li>
+        </ul>
+        <div class="mobile-auth-buttons">
+            <button class="btn btn-outline">Войти</button>
+            <button class="btn btn-accent">Начать сейчас</button>
+        </div>
+    </div>
+
+    <!-- Help Page Content -->
+    <main class="help-page">
+        <div class="container">
+            <div class="help-header">
+                <h1>Центр помощи ResumePro</h1>
+                <p>Найдите ответы на свои вопросы или свяжитесь с нами</p>
+            </div>
+            <div class="help-content">
+                <div class="help-section highlight-card">
+                    <h2>Как начать создание резюме?</h2>
+                    <ol>
+                        <li>Нажмите кнопку "Создать резюме" или "Начать сейчас".</li>
+                        <li>Заполните информацию о себе в редакторе.</li>
+                        <li>Выберите понравившийся шаблон.</li>
+                        <li>Предварительно просмотрите результат.</li>
+                        <li>Скачайте готовое резюме в формате PDF или сохраните его в Google Drive.</li>
+                    </ol>
+                </div>
+                <div class="help-section highlight-card">
+                    <h2>Как скачать резюме?</h2>
+                    <p>После завершения редактирования нажмите кнопку "Скачать в PDF" в верхней части редактора.</p>
+                </div>
+                <div class="help-section highlight-card">
+                    <h2>Как связаться с поддержкой?</h2>
+                    <p>Если вы не нашли ответ на свой вопрос, напишите нам на <a href="mailto:support@resumepro.ru">support@resumepro.ru</a>. Мы постараемся помочь вам в ближайшее время.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ResumePro</h3>
+                    <p>Интерактивный конструктор резюме для современных специалистов. Создавайте профессиональные резюме за минуты с нашими готовыми шаблонами.</p>
+                    <div class="footer-contact">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:support@resumepro.ru">support@resumepro.ru</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Главная</a></li>
+                        <li><a href="../index.html#templates-grid">Шаблоны</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Дополнительная информация</h3>
+                    <ul class="footer-links">
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="#">Помощь</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ResumePro. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <style>
+        .help-section.highlight-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent-color); /* Добавляет выделение */
+        }
+
+        .help-section.highlight-card h2 {
+            color: var(--primary-color);
+        }
+    </style>
+</body>
+</html>

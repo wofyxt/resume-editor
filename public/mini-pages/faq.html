@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Часто задаваемые вопросы - ResumePro</title>
+    <link rel="stylesheet" href="../styles/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 12H15M9 16H15M17 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V19C19 20.1046 18.1046 21 17 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    ResumePro
+                </a>
+                <ul class="nav-links">
+                    <li><a href="main-page.html">Главная</a></li>
+                    <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
+                    <li><a href="help.html">Помощь</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">Войти</button>
+                    <button class="btn btn-accent">Начать сейчас</button>
+                </div>
+                <button class="mobile-menu-btn">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="overlay"></div>
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="../index.html" class="logo">ResumePro</a>
+            <button class="close-menu">✕</button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="main-page.html">Главная</a></li>
+            <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
+            <li><a href="help.html">Помощь</a></li>
+        </ul>
+        <div class="mobile-auth-buttons">
+            <button class="btn btn-outline">Войти</button>
+            <button class="btn btn-accent">Начать сейчас</button>
+        </div>
+    </div>
+
+    <!-- FAQ Page Content -->
+    <main class="faq-page">
+        <div class="container">
+            <div class="faq-header">
+                <h1>Часто задаваемые вопросы (FAQ)</h1>
+                <p>Ответы на самые популярные вопросы о ResumePro</p>
+            </div>
+            <div class="faq-content">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Бесплатно ли пользоваться сервисом?
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Да, вы можете создать и редактировать резюме бесплатно. Возможность скачивания в PDF также доступна бесплатно без ограничений.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Какие форматы файлов поддерживаются для экспорта?
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Мы поддерживаем экспорт в PDF. Файлы создаются высокого качества, подходят для печати и отправки работодателям. Также возможен экспорт в Google Drive.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Могу ли я вернуться к своему резюме позже?
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Да, если вы зарегистрированы и вошли в свой аккаунт, ваши резюме будут сохраняться в вашем профиле.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Можно ли использовать ResumePro на мобильном устройстве?
+                        <span class="faq-toggle">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Да, наш сайт адаптирован для использования на планшетах и смартфонах.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ResumePro</h3>
+                    <p>Интерактивный конструктор резюме для современных специалистов. Создавайте профессиональные резюме за минуты с нашими готовыми шаблонами.</p>
+                    <div class="footer-contact">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:support@resumepro.ru">support@resumepro.ru</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Главная</a></li>
+                        <li><a href="../index.html#templates-grid">Шаблоны</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Дополнительная информация</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="help.html">Помощь</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ResumePro. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.nextElementSibling;
+                const toggle = button.querySelector('.faq-toggle');
+
+                // Переключение видимости ответа
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    toggle.textContent = '+';
+                } else {
+                    answer.style.display = 'block';
+                    toggle.textContent = '−';
+                }
+            });
+        });
+    </script>
+    <style>
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question:hover {
+            color: var(--primary-color);
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            margin-left: 1rem;
+        }
+
+        .faq-answer {
+            padding: 0 0 1.5rem 0;
+            display: none; /* Скрыто по умолчанию */
+            color: var(--secondary-color);
+        }
+
+        .faq-answer p {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</body>
+</html>

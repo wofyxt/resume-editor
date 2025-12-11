@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumePro - Конструктор профессиональных резюме</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 12H15M9 16H15M17 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3H17C18.1046 3 19 3.89543 19 5V19C19 20.1046 18.1046 21 17 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    ResumePro
+                </a>
+                
+                <ul class="nav-links">
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
+                    <li><a href="mini-pages/help.html">Помощь</a></li>
+                </ul>
+                
+                <div class="auth-buttons">
+                    <button class="btn btn-outline">Войти</button>
+                    <button class="btn btn-accent">Начать сейчас</button>
+                </div>
+                
+                <button class="mobile-menu-btn">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="overlay"></div>
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="#" class="logo">ResumePro</a>
+            <button class="close-menu">✕</button>
+        </div>
+        
+        <ul class="mobile-nav-links">
+            <li><a href="#">Главная</a></li>
+            <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
+            
+            <li><a href="mini-pages/help.html">Помощь</a></li>
+        </ul>
+        
+        <div class="mobile-auth-buttons">
+            <button class="btn btn-outline">Войти</button>
+            <button class="btn btn-accent">Начать сейчас</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Создайте <span>профессиональное</span> резюме за 10 минут</h1>
+                    <p>Интерактивный конструктор резюме с современными шаблонами, которые понравятся рекрутерам. Экспорт в PDF без водяных знаков.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-accent">Создать резюме</button>
+                        <button class="btn btn-outline btn-template" onclick="window.location.href='main-page.html#templates-grid'">Посмотреть шаблоны</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+    
+                       <img style='width: 650px; height: 350px; margin-left: 10px;' src="pictures/preview.png">
+                        
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Почему выбирают ResumePro?</h2>
+                <p>Мы создали идеальный инструмент для составления конкурентноспособного резюме</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Профессиональные шаблоны</h3>
+                    <p>Современные шаблоны, адаптированные под требования рекрутеров СНГ. Креативные, технические и традиционные стили.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 15V17M9 3H15C16.1046 3 17 3.89543 17 5V19C17 20.1046 16.1046 21 15 21H9C7.89543 21 7 20.1046 7 19V5C7 3.89543 7.89543 3 9 3Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Редактор в реальном времени</h3>
+                    <p>Смотрите, как меняется ваше резюме при вводе данных. Интуитивный интерфейс с перетаскиванием элементов.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 17L9 19C9 20.1046 9.89543 21 11 21H13C14.1046 21 15 20.1046 15 19V17M9 17H5C3.89543 17 3 16.1046 3 15V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5V15C21 16.1046 20.1046 17 19 17H15M9 17H15" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Экспорт в PDF</h3>
+                    <p>Скачивайте готовое резюме в популярном формате без водяных знаков. Идеальное качество для печати.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Section -->
+    <section class="templates">
+        <div class="container">
+            <div class="section-title">
+                <h2>Популярные шаблоны резюме</h2>
+                <p>Выберите дизайн, который подчеркнет ваши сильные стороны</p>
+            </div>
+            
+            <div class="templates-grid" id="templates-grid">
+                <div class="template-card">
+                    <div class="template-preview">
+                        <img style="width: 210px; height: 315px;" src="pictures/modern.png">
+                    </div>
+                    <div class="template-info">
+                        <h3>Современный</h3>
+                        <div class="template-tags">
+                            <span class="tag">IT</span>
+                            <span class="tag">Технический</span>
+                        </div>
+                        <p>Чистый и современный дизайн для IT-специалистов</p>
+                        <button class="btn btn-use">Использовать</button>
+                    </div>
+                </div>
+            
+                <div class="template-card">
+                    <div class="template-preview">
+                        <img style="width: 210px; height: 315px;" src="pictures/classic.png">
+                    </div>
+                    <div class="template-info">
+                        <h3>Классик</h3>
+                        <div class="template-tags">
+                            <span class="tag">Корпоративный</span>
+                            <span class="tag">Традиционный</span>
+                        </div>
+                        <p>Традиционный стиль для корпоративных позиций</p>
+                        <button class="btn btn-use">Использовать</button>
+                    </div>
+                </div>
+                
+                <div class="template-card">
+                    <div class="template-preview">
+                          <img style="width: 210px; height: 315px;" src="pictures/creative.png">
+                    </div>
+                    <div class="template-info">
+                        <h3>Креатив</h3>
+                        <div class="template-tags">
+                            <span class="tag">Дизайн</span>
+                            <span class="tag">Маркетинг</span>
+                        </div>
+                        <p>Яркий и творческий дизайн для дизайнеров и маркетологов</p>
+                        <button class="btn btn-use">Использовать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Начните создавать резюме прямо сейчас</h2>
+                <p>Присоединяйтесь к тысячам специалистов, которые уже нашли работу с помощью ResumePro</p>
+                <button class="btn btn-accent">Создать резюме бесплатно</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ResumePro</h3>
+                    <p>Интерактивный конструктор резюме для современных специалистов. Создавайте профессиональные резюме за минуты с нашими готовыми шаблонами.</p>
+                    <div class="footer-contact">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:support@resumepro.ru">support@resumepro.ru</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Навигация</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Главная</a></li>
+                        <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Дополнительная информация</h3>
+                    <ul class="footer-links">
+                        <li><a href="mini-pages/faq.html">FAQ</a></li>
+                        <li><a href="mini-pages/help.html">Помощь</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 ResumePro. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
