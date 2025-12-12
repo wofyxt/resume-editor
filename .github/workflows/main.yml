@@ -2,8 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]  # ← замени на свою ветку, если она называется master
-
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -14,7 +13,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment:          # ← ВАЖНО: именно здесь!
+    environment:
       name: github-pages
 
     steps:
@@ -27,7 +26,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'public'  # ← если сайт в корне
+          path: '/public'  # ← ЗДЕСЬ — корень репозитория, если index.html в корне
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
