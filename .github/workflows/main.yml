@@ -14,8 +14,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    # ✅ Обязательно добавь это!
-    environment:
+    environment:          # ← ВАЖНО: именно здесь!
       name: github-pages
 
     steps:
@@ -28,7 +27,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'  # ← если сайт в корне
+          path: './public'  # ← если сайт в корне
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
