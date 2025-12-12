@@ -26,7 +26,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '/public'  # ← ЗДЕСЬ — корень репозитория, если index.html в корне
+          path: './public'  # ← ЗДЕСЬ — корень репозитория, если index.html в корне
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
