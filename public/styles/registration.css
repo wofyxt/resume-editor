@@ -518,3 +518,14 @@
             opacity: 1;
             visibility: visible;
         }
+
+        /* Добавьте эти стили в ваш registration.css или внутрь тега <style> */
+        input.error {
+            border: 2px solid red; /* Красная рамка для невалидного поля */
+        }
+        .error-message {
+            color: red;
+            font-size: 0.85em;
+            margin-top: 0.25rem;
+            display: none; /* Скрыто по умолчанию */
+        }

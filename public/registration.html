@@ -6,6 +6,18 @@
     <title>ResumePro - Регистрация</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="styles/registration.css">
+    <style>
+        /* Добавьте эти стили в ваш registration.css или внутрь тега <style> */
+        input.error {
+            border: 2px solid red; /* Красная рамка для невалидного поля */
+        }
+        .error-message {
+            color: red;
+            font-size: 0.85em;
+            margin-top: 0.25rem;
+            display: none; /* Скрыто по умолчанию */
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -18,23 +30,19 @@
                     </svg>
                     ResumePro
                 </a>
-                
                 <ul class="nav-links">
                     <li><a href="main-page.html">Главная</a></li>
                     <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
                     <li><a href="mini-pages/help.html">Помощь</a></li>
                 </ul>
-                
                 <div class="auth-buttons">
                     <a href="login.html" class="btn btn-outline">Войти</a>
                     <a href="#" class="btn btn-accent">Зарегистрироваться</a>
                 </div>
-                
                 <button class="mobile-menu-btn">☰</button>
             </nav>
         </div>
     </header>
-
     <!-- Mobile Menu -->
     <div class="overlay"></div>
     <div class="mobile-menu">
@@ -42,20 +50,17 @@
             <a href="index.html" class="logo">ResumePro</a>
             <button class="close-menu">✕</button>
         </div>
-        
         <ul class="mobile-nav-links">
             <li><a href="index.html">Главная</a></li>
             <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
             <li><a href="examples.html">Примеры</a></li>
             <li><a href="help.html">Помощь</a></li>
         </ul>
-        
         <div class="mobile-auth-buttons">
             <a href="login.html" class="btn btn-outline">Войти</a>
             <a href="signup.html" class="btn btn-accent">Зарегистрироваться</a>
         </div>
     </div>
-
     <!-- Auth Section -->
     <section class="auth-section">
         <div class="container">
@@ -65,40 +70,33 @@
                         <h1>Создать аккаунт</h1>
                         <p>Зарегистрируйтесь, чтобы начать создавать профессиональные резюме</p>
                     </div>
-                    
                     <form class="auth-form" id="signup-form">
                         <div class="form-group">
                             <label for="name">Имя</label>
                             <input type="text" id="name" name="name" required>
                             <div class="error-message" id="name-error">Пожалуйста, введите ваше имя</div>
                         </div>
-                        
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                            <div class="error-message" id="email-error">Пожалуйста, введите корректный email</div>
+                            <input type="email" id="email" name="email" required> <!-- Тип "email" -->
+                            <div class="error-message" id="email-error">Пожалуйста, введите корректный email</div> <!-- Сообщение об ошибке -->
                         </div>
-                        
                         <div class="form-group">
                             <label for="password">Пароль</label>
                             <input type="password" id="password" name="password" required minlength="8">
                             <div class="error-message" id="password-error">Пароль должен содержать минимум 8 символов, включая буквы и цифры</div>
                             <div class="password-requirements">Минимум 8 символов, включая буквы и цифры</div>
                         </div>
-                        
                         <div class="form-group">
                             <label for="confirm-password">Подтверждение пароля</label>
                             <input type="password" id="confirm-password" name="confirm-password" required>
                             <div class="error-message" id="confirm-password-error">Пароли не совпадают</div>
                         </div>
-                        
                         <button type="submit" class="btn btn-accent">Зарегистрироваться</button>
                     </form>
-                    
                     <div class="divider">
                         <span>или</span>
                     </div>
-                    
                     <div class="auth-footer">
                         <p>Уже есть аккаунт? <a href="login.html">Войти</a></p>
                     </div>
@@ -106,7 +104,6 @@
             </div>
         </div>
     </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -119,7 +116,6 @@
                         <a href="mailto:support@resumepro.ru">support@resumepro.ru</a>
                     </div>
                 </div>
-                
                <div class="footer-column">
                     <h3>Навигация</h3>
                     <ul class="footer-links">
@@ -127,7 +123,6 @@
                     <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
                     </ul>
                 </div>
-                
                 <div class="footer-column">
                     <h3>Дополнительная информация</h3>
                     <ul class="footer-links">
@@ -136,57 +131,201 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>&copy; 2025 ResumePro. Все права защищены.</p>
             </div>
         </div>
     </footer>
-
     <script src="js/registration.js"></script>
     <script src="js/auth.js"></script>
     <script>
-    // Подключаем форму регистрации
-    document.getElementById('signup-form').addEventListener('submit', async function(event) {
-        event.preventDefault();
-        
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
-        
-        // Простая валидация
-        if (password !== confirmPassword) {
-            alert('Пароли не совпадают!');
-            return;
+        // Функция валидации email
+        function validateEmail(email) {
+            // Регулярное выражение для проверки email
+            // Это же выражение используется в registration.js
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return emailRegex.test(email);
         }
-        
-        if (password.length < 8) {
-            alert('Пароль должен быть минимум 8 символов!');
-            return;
+
+        // Получаем элементы формы и сообщения об ошибке
+        const signupForm = document.getElementById('signup-form');
+        const emailInput = document.getElementById('email');
+        const emailErrorDiv = document.getElementById('email-error');
+
+        // Функция для показа ошибки
+        function showError(input, message, errorDiv) {
+            input.classList.add('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
         }
-        
-        try {
-            const response = await fetch('http://localhost:3000/api/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email, password })
-            });
-            
-            const data = await response.json();
-            
-            if (response.ok) {
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('user', JSON.stringify(data.user));
-                alert('Регистрация успешна!');
-                window.location.href = 'dashboard.html';
+
+        // Функция для скрытия ошибки
+        function hideError(input, errorDiv) {
+            input.classList.remove('error');
+            errorDiv.style.display = 'none';
+        }
+
+        // Валидация email при потере фокуса (blur)
+        emailInput.addEventListener('blur', function() {
+            if (!validateEmail(this.value)) {
+                showError(this, 'Пожалуйста, введите корректный email (например, user@example.com)', emailErrorDiv);
             } else {
-                alert(data.error || 'Ошибка регистрации');
+                hideError(this, emailErrorDiv);
             }
-        } catch (error) {
-            alert('Ошибка подключения к серверу');
+        });
+
+        // Валидация при отправке формы
+        signupForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value; // Получаем значение
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            // Сброс предыдущих ошибок
+            hideError(emailInput, emailErrorDiv);
+
+            // Проверка валидности email
+            if (!validateEmail(email)) {
+                showError(emailInput, 'Пожалуйста, введите корректный email (например, user@example.com)', emailErrorDiv);
+                return; // Останавливаем выполнение, если email невалиден
+            }
+
+            // Остальная валидация и логика отправки...
+            if (password !== confirmPassword) {
+                alert('Пароли не совпадают!');
+                return;
+            }
+            if (password.length < 8) {
+                alert('Пароль должен быть минимум 8 символов!');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, password })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    alert('Регистрация успешна!');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert(data.error || 'Ошибка регистрации');
+                }
+            } catch (error) {
+                alert('Ошибка подключения к серверу');
+            }
+        });
+
+        // Функция для регистрации
+        async function registerUser(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                alert('Пароли не совпадают!');
+                return;
+            }
+            if (password.length < 8) {
+                alert('Пароль должен быть минимум 8 символов!');
+                return;
+            }
+            try {
+                const response = await fetch('http://localhost:3000/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email, password })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    alert('Регистрация успешна!');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert(data.error || 'Ошибка регистрации');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка подключения к серверу');
+            }
         }
-    });
-</script>
+
+        // Функция для входа
+        async function loginUser(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            try {
+                const response = await fetch('http://localhost:3000/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    alert('Вход успешен!');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    alert(data.error || 'Ошибка входа');
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+                alert('Ошибка подключения к серверу');
+            }
+        }
+
+        // Функция проверки авторизации
+        async function checkAuth() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                if (!window.location.href.includes('login.html') &&
+                    !window.location.href.includes('registration.html')) {
+                    window.location.href = 'login.html';
+                }
+                return null;
+            }
+            try {
+                const response = await fetch('http://localhost:3000/api/verify', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!response.ok) {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    window.location.href = 'login.html';
+                    return null;
+                }
+                return token;
+            } catch (error) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                window.location.href = 'login.html';
+                return null;
+            }
+        }
+
+        // Выход из системы
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        }
+    </script>
 </body>
 </html>

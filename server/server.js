@@ -6,15 +6,16 @@ const cors = require('cors');
 require('dotenv').config();
 const { pool, createTables } = require('./database.js');
 const captchaStore = {};
+const path = require('path');
 const app = express();
 const { google } = require('googleapis');
 const PORT = process.env.PORT || 3000;
 const fs = require('fs');
-const path = require('path');
+
 // Настройка сервера
 app.use(cors());
 app.use(express.json()); // Для чтения JSON из запросов
-app.use(express.static('public')); // Твои HTML файлы будут доступны
+app.use(express.static(path.join(__dirname, '..', 'public')));
 const router = express.Router(); //
 // Создаем таблицы при запуске
 createTables();
@@ -84,7 +85,7 @@ app.post('/api/login', async (req, res) => {
         );
         
         if (result.rows.length === 0) {
-            return res.status(400).json({ error: 'Неверный email или пароль' });
+            return res.status(400).json({ error: 'Неверный email' });
         }
         
         const user = result.rows[0];
@@ -106,15 +107,18 @@ app.post('/api/login', async (req, res) => {
             { expiresIn: '24h' }
         );
         
-        res.json({
-            message: 'Вход успешен',
-            token: token,
-            user: {
-                id: user.user_id,
-                name: user.name,
-                email: user.email
-            }
-        });
+      
+         // Стало:
+res.json({
+  message: 'Вход успешен',
+  token: token, // <-- Токен по-прежнему возвращается в JSON
+  user: {
+      id: user.user_id,
+      name: user.name,
+      email: user.email
+  }
+});
+        
         
     } catch (error) {
         console.error('Ошибка входа:', error);

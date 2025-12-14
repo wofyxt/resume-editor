@@ -115,7 +115,7 @@
             <h1 style="text-align: center;">Ваш Профиль</h1>
         <section class="profile-section">
             <div id="profileInfo">
-                <p>Загрузка профиля...</p>
+                <p></p>
             </div>
         </section>
         <section class="resumes-section">
@@ -302,7 +302,7 @@
             // Функция для получения и отображения профиля
            async function loadProfile() {
     try {
-        const response = await fetch('/api/profile', {
+        const response = await fetch('http://localhost:3000/api/profile', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -371,9 +371,10 @@
             }
             // Функция для выхода
             function logout() {
-                localStorage.removeItem('authToken');
-                window.location.href = 'login.html';
-            }
+    localStorage.removeItem('token');   // ✅
+    localStorage.removeItem('user');    // ✅
+    window.location.href = 'login.html';
+}
             // Функция для перехода к редактору нового резюме
             function createNewResume() {
                 // Просто перенаправляем на редактор, не передавая ID резюме

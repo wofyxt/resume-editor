@@ -6,6 +6,21 @@
     <title>ResumePro - Вход</title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link rel="stylesheet" href="styles/login.css">
+    <style>
+        /* Добавьте эти стили в ваш login.css или внутрь тега <style> */
+        .error-message {
+            color: red;
+            font-size: 0.85em;
+            margin-top: 0.25rem;
+            display: none; /* Скрыто по умолчанию */
+        }
+        .form-group .error {
+            border: 2px solid red; /* Красная рамка для невалидного поля */
+        }
+        .form-group input:focus:invalid {
+            outline: 2px solid red; /* Красный оутлайн при фокусе, если невалидно */
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -18,23 +33,19 @@
                     </svg>
                     ResumePro
                 </a>
-                
                 <ul class="nav-links">
                     <li><a href="main-page.html">Главная</a></li>
                     <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
                     <li><a href="mini-pages/help.html">Помощь</a></li>
                 </ul>
-                
                 <div class="auth-buttons">
                     <a href="#" class="btn btn-outline">Войти</a>
-                    <a href="registration.html".html" class="btn btn-accent">Зарегистрироваться</a>
+                    <a href="registration.html" class="btn btn-accent">Зарегистрироваться</a>
                 </div>
-                
                 <button class="mobile-menu-btn">☰</button>
             </nav>
         </div>
     </header>
-
     <!-- Mobile Menu -->
     <div class="overlay"></div>
     <div class="mobile-menu">
@@ -42,20 +53,17 @@
             <a href="index.html" class="logo">ResumePro</a>
             <button class="close-menu">✕</button>
         </div>
-        
         <ul class="mobile-nav-links">
             <li><a href="index.html">Главная</a></li>
             <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
             <li><a href="examples.html">Примеры</a></li>
             <li><a href="help.html">Помощь</a></li>
         </ul>
-        
         <div class="mobile-auth-buttons">
             <a href="login.html" class="btn btn-outline">Войти</a>
             <a href="registration.html" class="btn btn-accent">Зарегистрироваться</a>
         </div>
     </div>
-
     <!-- Auth Section -->
     <section class="auth-section">
         <div class="container">
@@ -65,20 +73,17 @@
                         <h1>Войти в аккаунт</h1>
                         <p>Войдите, чтобы продолжить создание резюме</p>
                     </div>
-                    
                     <form class="auth-form" id="login-form">
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" required>
-                            <div class="error-message" id="email-error">Пожалуйста, введите корректный email</div>
+                            <div class="error-message" id="email-error">Пожалуйста, введите корректный email (например, user@example.com)</div>
                         </div>
-                        
                         <div class="form-group">
                             <label for="password">Пароль</label>
                             <input type="password" id="password" name="password" required>
                             <div class="error-message" id="password-error">Пожалуйста, введите пароль</div>
                         </div>
-                        
                      <!-- НОВОЕ: Добавляем CAPTCHA -->
 <div class="form-group">
     <label for="captcha-input">Введите код с картинки</label>
@@ -100,14 +105,11 @@
                             </div>
                             <a href="forgot-password.html" class="forgot-password">Забыли пароль?</a>
                         </div>
-                        
                         <button type="submit" class="btn btn-accent">Войти</button>
                     </form>
-                    
                     <div class="divider">
                         <span>или</span>
                     </div>
-                    
                     <div class="auth-footer">
                         <p>Нет аккаунта? <a href="registration.html">Зарегистрироваться</a></p>
                     </div>
@@ -115,7 +117,6 @@
             </div>
         </div>
     </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -128,16 +129,13 @@
                         <a href="mailto:support@resumepro.ru">support@resumepro.ru</a>
                     </div>
                 </div>
-                
                <div class="footer-column">
                     <h3>Навигация</h3>
                     <ul class="footer-links">
                         <li><a href="main-page.html">Главная</a></li>
                         <li><a href="main-page.html#templates-grid">Шаблоны</a></li>
-
                     </ul>
                 </div>
-                
                 <div class="footer-column">
                     <h3>Дополнительная информация</h3>
                     <ul class="footer-links">
@@ -146,30 +144,107 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>&copy; 2025 ResumePro. Все права защищены.</p>
             </div>
         </div>
     </footer>
-
     <script src="js/login.js"></script>
     <script src="js/auth.js"></script>
-    <script>
-    // Подключаем форму входа
-   // --- ОБНОВЛЁННЫЙ ОБРАБОТЧИК ОТПРАВКИ ФОРМЫ ---
-document.getElementById('login-form').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Предотвращаем стандартную отправку формы
-
-    // Сначала проверяем CAPTCHA
-    if (!validateCaptcha()) {
-        console.log("Проверка CAPTCHA не пройдена.");
-        return; // Выходим из функции, если CAPTCHA неправильная
+   <script>
+    // Функция валидации email
+    function validateEmail(email) {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(email);
     }
 
-    console.log("Проверка CAPTCHA пройдена. Отправляем данные на сервер.");
+    // Получаем элементы формы и сообщения об ошибке
+    const loginForm = document.getElementById('login-form');
+    const emailInput = document.getElementById('email');
+    const emailErrorDiv = document.getElementById('email-error');
 
-    // Если CAPTCHA правильная, собираем данные
+    // Функция для показа ошибки
+    function showError(input, message, errorDiv) {
+        input.classList.add('error');
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+    }
+
+    // Функция для скрытия ошибки
+    function hideError(input, errorDiv) {
+        input.classList.remove('error');
+        errorDiv.style.display = 'none';
+    }
+
+    // Валидация email при потере фокуса (blur)
+    emailInput.addEventListener('blur', function() {
+        if (!validateEmail(this.value)) {
+            showError(this, 'Пожалуйста, введите корректный email (например, user@example.com)', emailErrorDiv);
+        } else {
+            hideError(this, emailErrorDiv);
+        }
+    });
+
+    // --- КЛИЕНТСКАЯ ЗАЩИТА ---
+    const MAX_ATTEMPTS = 5;
+    const BLOCK_DURATION = 15 * 60 * 1000; // 15 минут в миллисекундах
+
+    function checkBlockStatus() {
+        const blockInfo = JSON.parse(localStorage.getItem('loginBlock'));
+        if (!blockInfo) return false;
+
+        const now = Date.now();
+        if (now - blockInfo.time < BLOCK_DURATION) {
+            const remaining = Math.ceil((BLOCK_DURATION - (now - blockInfo.time)) / 1000 / 60);
+            alert(`Вы заблокированы на ${remaining} мин.`);
+            showBlockMessage(remaining);
+            return true;
+        } else {
+            localStorage.removeItem('loginBlock');
+            return false;
+        }
+    }
+
+    function showBlockMessage(minutesLeft) {
+        const form = document.querySelector('.auth-form');
+        const blockMsg = document.createElement('div');
+        blockMsg.id = 'block-message';
+        blockMsg.style.color = 'red';
+        blockMsg.textContent = `Заблокировано. Повторите через ${minutesLeft} мин.`;
+        form.appendChild(blockMsg);
+
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.classList.add('disabled');
+    }
+
+    function incrementAttempts() {
+        let attempts = parseInt(localStorage.getItem('loginAttempts') || '0');
+        attempts++;
+        localStorage.setItem('loginAttempts', attempts);
+
+        if (attempts >= MAX_ATTEMPTS) {
+            localStorage.setItem('loginBlock', JSON.stringify({ time: Date.now() }));
+            localStorage.removeItem('loginAttempts');
+            alert('Слишком много попыток. Повторите позже.');
+            location.reload();
+        }
+    }
+
+    // Единственный обработчик формы
+   document.getElementById('login-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    if (checkBlockStatus()) return;
+
+    // Валидация email
+    if (!validateEmail(emailInput.value)) {
+        showError(emailInput, 'Пожалуйста, введите корректный email (например, user@example.com)', emailErrorDiv);
+        return;
+    }
+
+    // Убрали проверку validateCaptcha()
+
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
@@ -183,22 +258,21 @@ document.getElementById('login-form').addEventListener('submit', async function(
         const data = await response.json();
 
         if (response.ok) {
+            localStorage.removeItem('loginAttempts'); // Сброс счётчика при успехе
+            localStorage.removeItem('loginBlock');     // Сброс блока при успехе
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
             alert('Вход успешен!');
             window.location.href = 'dashboard.html';
         } else {
-            // Сбросим CAPTCHA при ошибке входа (по желанию)
-            generateCaptcha();
+            incrementAttempts(); // Увеличиваем счётчик при ошибке
             alert(data.error || 'Ошибка входа');
         }
     } catch (error) {
-        // Сбросим CAPTCHA при ошибке сети (по желанию)
-        generateCaptcha();
+        incrementAttempts();
         alert('Ошибка подключения к серверу');
     }
 });
-// --- /КОНЕЦ ОБНОВЛЁННОГО ОБРАБОТЧИКА ---
 </script>
 </body>
 </html>
