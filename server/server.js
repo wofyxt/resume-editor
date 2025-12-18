@@ -107,8 +107,6 @@ app.post('/api/login', async (req, res) => {
             { expiresIn: '24h' }
         );
         
-      
-         // Стало:
 res.json({
   message: 'Вход успешен',
   token: token, // <-- Токен по-прежнему возвращается в JSON
@@ -587,34 +585,51 @@ app.post('/api/export-to-drive', async (req, res) => {
 
 // ========== НОВЫЙ МАРШРУТ: ОБНОВЛЕНИЕ АВАТАРА ==========
 // Настройка multer для загрузки аватаров (как у вас уже есть)
+// Настройка multer для загрузки аватаров
 const avatarStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const uploadDir = 'public/uploads/avatars/'; // Папка для сохранения аватаров
-    if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir, { recursive: true });
+    // Лог: Проверяем текущий рабочий каталог сервера
+    console.log("Текущий рабочий каталог сервера:", process.cwd());
+   // Используем абсолютный путь, чтобы файлы сохранялись в папке public, обслуживаемой express.static
+const uploadDir = path.join(__dirname, '..', 'public', 'uploads', 'avatars');
+console.log("Путь к папке для сохранения аватаров (абсолютный):", uploadDir); // Лог: проверка абсолютного пути
+    console.log("Путь к папке для сохранения аватаров:", uploadDir);
+
+    // Попробуем создать папку
+    try {
+      if (!fs.existsSync(uploadDir)) {
+          console.log("Папка", uploadDir, "не существует. Создаю...");
+          fs.mkdirSync(uploadDir, { recursive: true });
+          console.log("Папка", uploadDir, "успешно создана.");
+      } else {
+          console.log("Папка", uploadDir, "уже существует.");
+      }
+      cb(null, uploadDir);
+    } catch (err) {
+      console.error("Ошибка создания папки:", err.message);
+      cb(err);
     }
-    cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const ext = path.extname(file.originalname);
-    // Извлекаем userId из токена (так же, как в других маршрутах)
+    const ext = path.extname(file.originalname).toLowerCase(); // <-- Используем toLowerCase()
+    // Извлекаем userId из токена
     const token = req.headers.authorization?.split(' ')[1];
-    let userId = 'unknown'; // Значение по умолчанию на случай ошибки
+    let userId = 'unknown';
     try {
       if (token) {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         userId = decoded.userId;
       } else {
-        // Если токен не передан, multer не вызовет обработчик маршрута, но на всякий случай
         return cb(new Error('Токен не предоставлен для генерации имени файла'), false);
       }
     } catch (err) {
       console.error('Ошибка извлечения userId для имени файла:', err.message);
-      // Важно: не возвращайте cb с ошибкой здесь, т.к. это произойдет до проверки токена в маршруте
-      // Лучше обработать ошибку в самом маршруте, как это делается ниже
+      return cb(err, false);
     }
-    cb(null, 'avatar_' + userId + '_' + uniqueSuffix + ext);
+    const filename = 'avatar_' + userId + '_' + uniqueSuffix + ext;
+    console.log("Генерируем имя файла:", filename); // Лог: имя файла
+    cb(null, filename);
   }
 });
 

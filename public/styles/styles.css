@@ -228,6 +228,10 @@
             gap: 1rem;
         }
 
+        #prev-picture{
+                width: 650px; height: 350px; margin-left: 10px;
+            }
+
         /* Features Section */
         .features {
             padding: 5rem 0;
@@ -562,6 +566,11 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
+            }
+
+            #prev-picture{
+                width: 85%;
+                height: 600%;
             }
         }
 
